@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { Home } from './components/Home'
+
+import './styles/global.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div>oi mundo</div>
-  )
+	return <Home />
 }
 
 export default App
