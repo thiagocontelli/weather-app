@@ -22,12 +22,30 @@ interface ClimateProviderProps {
 	children: ReactNode;
 }
 
-export const ClimateContext = createContext<Climate[]>([]);
+interface ClimateContextData {
+	climate: Climate[];
+  cityName: string;
+  temperature: number;
+  description: string;
+  icon: string;
+	searchCity: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const ClimateContext = createContext<ClimateContextData>(
+	{} as ClimateContextData
+);
 
 export function ClimateProvider({ children }: ClimateProviderProps) {
 	const [climate, setClimate] = useState<Climate[]>([]);
 	const BASE_URL = 'http://api.weatherbit.io/v2.0/current';
 	const API_KEY = '1ec498f88764490dbd9730df1c5f1b95';
+
+	const cityName = climate[0]?.city_name;
+	const temperature = climate[0]?.temp;
+	const description = climate[0]?.weather.description;
+	const icon = climate[0]?.weather.icon;
+
+	const [city, setCity] = useState('');
 
 	const [lat, setLat] = useState<number>();
 	const [lon, setLon] = useState<number>();
@@ -54,8 +72,12 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 		getData();
 	}, [lat]);
 
+	function searchCity(e: React.ChangeEvent<HTMLInputElement>) {
+		return setCity(e.target.value);
+	}
+
 	return (
-		<ClimateContext.Provider value={climate}>
+		<ClimateContext.Provider value={{ climate, searchCity, cityName, description, icon, temperature }}>
 			{children}
 		</ClimateContext.Provider>
 	);
