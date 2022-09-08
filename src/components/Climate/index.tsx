@@ -1,5 +1,15 @@
-import { Container } from "./style";
+import { Container } from './style';
+import { useContext } from 'react';
+import { ClimateContext } from '../../ClimateContext';
 
 export function Climate() {
-  return <Container />
+	const climate = useContext(ClimateContext);
+
+	return (
+		<Container>
+			<img
+				src={`https://www.weatherbit.io/static/img/icons/${climate[0]?.weather.icon}.png`}
+			/>
+		</Container>
+	);
 }
