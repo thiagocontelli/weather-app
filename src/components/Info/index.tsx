@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Container, Degree, Local } from './style'
@@ -38,4 +39,21 @@ export function Info() {
 			<Degree>18 °C</Degree>
 		</Container>
 	)
+=======
+import { useContext } from 'react';
+import { ClimateContext } from '../../ClimateContext';
+import { Container, Degree, Local } from './style';
+
+export function Info() {
+	const { cityName, temperature, description } = useContext(ClimateContext);
+
+
+	return (
+		<Container>
+			<Local>{cityName?.toUpperCase()}</Local>
+			<Degree>{Math?.floor(temperature)}°C</Degree>
+      <p>{description}</p>
+		</Container>
+	);
+>>>>>>> 5840e07db733f2231f7e1ccd4b0e7f67fe43e445
 }

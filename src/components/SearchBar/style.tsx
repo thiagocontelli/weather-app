@@ -1,31 +1,26 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
 	width: 250px;
 	height: 50px;
 
-	background: #bfbfbf;
+	background: #ffffff;
 
-	border-top: 2px solid white;
-	border-left: 2px solid white;
-	border-right: 2px solid black;
-	border-bottom: 2px solid black;
+	border-radius: 3rem;
+	border: 2px solid gray;
 
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-`
+`;
 
 export const SearchInput = styled.div`
 	width: 190px;
 	height: 35px;
 
-	background: #d9d9d9;
+	background: transparent;
 
-	border-top: 2px solid black;
-	border-left: 2px solid black;
-	border-right: 2px solid white;
-	border-bottom: 2px solid white;
+	border-radius: 3rem;
 
 	input {
 		width: 100%;
@@ -39,24 +34,25 @@ export const SearchInput = styled.div`
 		background: transparent;
 
 		&::placeholder {
-			color: black;
+			color: #797979;
 		}
 	}
-`
+`;
 
 export const SearchButton = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	width: 35px;
 	height: 35px;
 
 	border: none;
-	background: #070caf;
+	border-radius: 100%;
+	background: transparent;
 
-	border-top: 2px solid white;
-	border-left: 2px solid white;
-	border-right: 2px solid black;
-	border-bottom: 2px solid black;
-
-  img {
-    width: 90%;
-  }
-`
+	svg {
+		color: gray;
+		font-size: 1.5rem;
+	}
+`;
