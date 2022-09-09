@@ -1,10 +1,10 @@
 import { Container, SearchButton, SearchInput } from './style';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { ClimateContext } from '../../ClimateContext';
 
 export function SearchBar() {
-	const { climate, searchCity } = useContext(ClimateContext);
+	const { onInputChange, handleSearchCity } = useContext(ClimateContext);
 
 	return (
 		<Container>
@@ -14,10 +14,10 @@ export function SearchBar() {
 					name="searchBar"
 					id="searchBar"
 					placeholder="Digite o nome da cidade"
-					onChange={e => searchCity(e)}
+					onChange={(e) => onInputChange(e)}
 				/>
 			</SearchInput>
-			<SearchButton>
+			<SearchButton onClick={handleSearchCity}>
 				<AiOutlineSearch />
 			</SearchButton>
 		</Container>
