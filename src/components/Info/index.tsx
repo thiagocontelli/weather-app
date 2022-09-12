@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 import { ClimateContext } from '../../ClimateContext';
-import { Container, Degree, Local } from './style';
+import { Container, Degree, Description, Local } from './style';
 
 export function Info() {
-	const { cityName, countryCode, temperature, description } =
+	const { city, countryCode, temperature, description } =
 		useContext(ClimateContext);
 
 	return (
 		<Container>
 			<Local>
-				{cityName?.toUpperCase()} - {countryCode}
+				{city?.toUpperCase()} - {countryCode}
 			</Local>
 			<Degree>{Math?.floor(temperature)}°C</Degree>
-			<p>{description}</p>
+			<Description>{description}</Description>
 		</Container>
 	);
 }

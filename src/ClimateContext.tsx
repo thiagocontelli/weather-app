@@ -26,6 +26,7 @@ interface ClimateProviderProps {
 interface ClimateContextData {
 	climate: Climate[];
 	cityName: string;
+	city: string;
 	countryCode: string;
 	temperature: number;
 	description: string;
@@ -46,9 +47,10 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	const [lat, setLat] = useState<number>();
 	const [lon, setLon] = useState<number>();
 
-	const BASE_URL = 'http://api.weatherbit.io/v2.0/current';
+	const BASE_URL = 'http://api.weatherbit.io/v2.0/current?';
 	const API_KEY = '1ec498f88764490dbd9730df1c5f1b95';
 
+	const city = climate[0]?.city_name;
 	const temperature = climate[0]?.temp;
 	const description = climate[0]?.weather.description;
 	const icon = climate[0]?.weather.icon;
@@ -65,7 +67,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	useEffect(() => {
 		async function getData() {
 			await axios
-				.get(`${BASE_URL}?city=${cityName}&key=${API_KEY}&lang=pt`)
+				.get(`${BASE_URL}city=${cityName}&key=${API_KEY}&lang=pt`)
 				.then((response) => setClimate(response.data.data))
 				.catch((error) => console.log('ERRO:', error));
 		}
@@ -93,6 +95,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 				handleSearchCity,
 				handlePressEnter,
 				cityName,
+				city,
 				countryCode,
 				description,
 				icon,
