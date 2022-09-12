@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { ClimateContext } from '../../ClimateContext';
 
 export function SearchBar() {
-	const { onInputChange, handleSearchCity } = useContext(ClimateContext);
+	const { onInputChange, handleSearchCity, handlePressEnter } =
+		useContext(ClimateContext);
 
 	return (
 		<Container>
@@ -15,6 +16,7 @@ export function SearchBar() {
 					id="searchBar"
 					placeholder="Digite o nome da cidade"
 					onChange={(e) => onInputChange(e)}
+					onKeyDown={(e) => handlePressEnter(e)}
 				/>
 			</SearchInput>
 			<SearchButton onClick={handleSearchCity}>

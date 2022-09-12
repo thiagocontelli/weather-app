@@ -32,6 +32,7 @@ interface ClimateContextData {
 	icon: string;
 	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleSearchCity: () => void;
+	handlePressEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const ClimateContext = createContext<ClimateContextData>(
@@ -73,11 +74,15 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	}, [cityName]);
 
 	function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		return setDefaultCity(e.target.value);
+		setDefaultCity(e.target.value);
 	}
 
 	function handleSearchCity() {
 		setCityName(defaultCity);
+	}
+
+	function handlePressEnter(e: React.KeyboardEvent<HTMLInputElement>) {
+		e.key === 'Enter' && setCityName(defaultCity);
 	}
 
 	return (
@@ -86,6 +91,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 				climate,
 				onInputChange,
 				handleSearchCity,
+				handlePressEnter,
 				cityName,
 				countryCode,
 				description,
