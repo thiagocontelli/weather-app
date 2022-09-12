@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface Climate {
 	city_name: string;
+	country_code: string;
 	temp: number;
 	weather: {
 		code: number;
@@ -25,6 +26,7 @@ interface ClimateProviderProps {
 interface ClimateContextData {
 	climate: Climate[];
 	cityName: string;
+	countryCode: string;
 	temperature: number;
 	description: string;
 	icon: string;
@@ -39,7 +41,7 @@ export const ClimateContext = createContext<ClimateContextData>(
 export function ClimateProvider({ children }: ClimateProviderProps) {
 	const [climate, setClimate] = useState<Climate[]>([]);
 	const [cityName, setCityName] = useState('Orlando');
-	const [city, setCity] = useState('');
+	const [defaultCity, setDefaultCity] = useState('');
 	const [lat, setLat] = useState<number>();
 	const [lon, setLon] = useState<number>();
 
@@ -49,6 +51,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	const temperature = climate[0]?.temp;
 	const description = climate[0]?.weather.description;
 	const icon = climate[0]?.weather.icon;
+	const countryCode = climate[0]?.country_code;
 
 	window.navigator.geolocation &&
 		window.navigator.geolocation.getCurrentPosition(success);
@@ -70,11 +73,11 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	}, [cityName]);
 
 	function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-		return setCity(e.target.value);
+		return setDefaultCity(e.target.value);
 	}
 
 	function handleSearchCity() {
-		setCityName(city);
+		setCityName(defaultCity);
 	}
 
 	return (
@@ -84,6 +87,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 				onInputChange,
 				handleSearchCity,
 				cityName,
+				countryCode,
 				description,
 				icon,
 				temperature,
