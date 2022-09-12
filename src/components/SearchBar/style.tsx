@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface IContainer {
+	isOnFocus: boolean;
+}
+
+export const Container = styled.div<IContainer>`
 	width: 250px;
 	height: 50px;
 
@@ -13,6 +17,9 @@ export const Container = styled.div`
 	justify-content: space-around;
 
 	transition: all ease 0.5s;
+
+	box-shadow: ${({ isOnFocus }) =>
+		isOnFocus && '4px 4px 5px rgba(0, 0, 0, 0.25)'};
 
 	:hover {
 		box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
