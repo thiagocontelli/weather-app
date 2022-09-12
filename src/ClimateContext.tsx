@@ -31,6 +31,7 @@ interface ClimateContextData {
 	temperature: number;
 	description: string;
 	icon: string;
+	isLoading: boolean;
 	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleSearchCity: () => void;
 	handlePressEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -42,10 +43,12 @@ export const ClimateContext = createContext<ClimateContextData>(
 
 export function ClimateProvider({ children }: ClimateProviderProps) {
 	const [climate, setClimate] = useState<Climate[]>([]);
-	const [cityName, setCityName] = useState('Orlando');
+	const [cityName, setCityName] = useState('');
 	const [defaultCity, setDefaultCity] = useState('');
 	const [lat, setLat] = useState<number>();
 	const [lon, setLon] = useState<number>();
+
+	const [isLoading, setIsLoading] = useState(true);
 
 	const url = import.meta.env.VITE_APP_BASE_URL;
 	const key = import.meta.env.VITE_APP_API_KEY;
@@ -56,24 +59,30 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	const icon = climate[0]?.weather.icon;
 	const countryCode = climate[0]?.country_code;
 
-	window.navigator.geolocation &&
-		window.navigator.geolocation.getCurrentPosition(success);
+	useEffect(() => {
+		if (navigator.geolocation) {
+			window.navigator.geolocation.getCurrentPosition((position) => {
+				setLat(position.coords.latitude);
+				setLon(position.coords.longitude);
+			});
+		} else {
+			alert('Sorry, no position available.');
+		}
+	}, []);
 
-	function success(position: Position) {
-		setLat(position.coords.latitude);
-		setLon(position.coords.longitude);
-	}
+	useEffect(() => {
+		async function getData() {
+			await axios
+				.get(`${url}lat=${lat}&lon=${lon}&key=${key}&lang=pt`)
+				.then((response) => {
+					setClimate(response.data.data);
+					setIsLoading(false);
+				})
+				.catch((error) => console.log('ERRO:', error));
+		}
 
-	// useEffect(() => {
-	// 	async function getData() {
-	// 		await axios
-	// 			.get(`${BASE_URL}lat=${lat}&lon=${lon}&key=${API_KEY}&lang=pt`)
-	// 			.then((response) => setClimate(response.data.data))
-	// 			.catch((error) => console.log('ERRO:', error));
-	// 	}
-
-	// 	getData();
-	// }, []);
+		getData();
+	}, [lat, lon]);
 
 	useEffect(() => {
 		async function getData() {
@@ -111,6 +120,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 				description,
 				icon,
 				temperature,
+				isLoading,
 			}}
 		>
 			{children}
