@@ -4,14 +4,19 @@ export const Container = styled.div`
 	width: 250px;
 	height: 50px;
 
-	background: #ffffff;
+	background: white;
 
 	border-radius: 3rem;
-	border: 2px solid gray;
 
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+
+	transition: all ease 0.5s;
+
+	:hover {
+		box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+	}
 `;
 
 export const SearchInput = styled.div`
@@ -54,5 +59,9 @@ export const SearchButton = styled.button`
 	svg {
 		color: gray;
 		font-size: 1.5rem;
+	}
+
+	:hover {
+		filter: brightness(0.8);
 	}
 `;
