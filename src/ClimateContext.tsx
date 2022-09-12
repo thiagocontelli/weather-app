@@ -47,8 +47,8 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	const [lat, setLat] = useState<number>();
 	const [lon, setLon] = useState<number>();
 
-	const BASE_URL = 'http://api.weatherbit.io/v2.0/current?';
-	const API_KEY = '1ec498f88764490dbd9730df1c5f1b95';
+	const url = import.meta.env.VITE_APP_BASE_URL;
+	const key = import.meta.env.VITE_APP_API_KEY;
 
 	const city = climate[0]?.city_name;
 	const temperature = climate[0]?.temp;
@@ -64,10 +64,21 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 		setLon(position.coords.longitude);
 	}
 
+	// useEffect(() => {
+	// 	async function getData() {
+	// 		await axios
+	// 			.get(`${BASE_URL}lat=${lat}&lon=${lon}&key=${API_KEY}&lang=pt`)
+	// 			.then((response) => setClimate(response.data.data))
+	// 			.catch((error) => console.log('ERRO:', error));
+	// 	}
+
+	// 	getData();
+	// }, []);
+
 	useEffect(() => {
 		async function getData() {
 			await axios
-				.get(`${BASE_URL}city=${cityName}&key=${API_KEY}&lang=pt`)
+				.get(`${url}city=${cityName}&key=${key}&lang=pt`)
 				.then((response) => setClimate(response.data.data))
 				.catch((error) => console.log('ERRO:', error));
 		}
