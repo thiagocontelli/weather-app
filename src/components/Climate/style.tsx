@@ -8,7 +8,7 @@ export const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	/* img {
+	img {
 		filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.25));
-	} */
+	}
 `;

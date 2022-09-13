@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 	* {
@@ -21,7 +21,10 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	body {
-		font-family: sans-serif;
+		font-family: 'Poppins', sans-serif;
+    color: white;
+    background: rgb(75,115,243);
+    background: linear-gradient(90deg, rgba(75,115,243,1) 0%, rgba(75,115,243,1) 35%, rgba(0,159,191,1) 100%);
 	}
 
 	button {

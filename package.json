@@ -10,10 +10,12 @@
     "lint" : "./node_modules/.bin/eslint ."
   },
   "dependencies": {
+    "@types/node": "^18.7.16",
     "@types/styled-components": "^5.1.26",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loading-icons": "^1.1.0",
     "sass": "^1.54.6",
     "styled-components": "^5.3.5"
   },

@@ -4,20 +4,26 @@ import { useContext, useState } from 'react';
 import { ClimateContext } from '../../ClimateContext';
 
 export function SearchBar() {
-	const { climate, searchCity } = useContext(ClimateContext);
+	const { onInputChange, handleSearchCity, handlePressEnter } =
+		useContext(ClimateContext);
+
+	const [isOnFocus, setIsOnFocus] = useState(false);
 
 	return (
-		<Container>
+		<Container isOnFocus={isOnFocus}>
 			<SearchInput>
 				<input
 					type="text"
 					name="searchBar"
 					id="searchBar"
 					placeholder="Digite o nome da cidade"
-					onChange={e => searchCity(e)}
+					onChange={(e) => onInputChange(e)}
+					onKeyDown={(e) => handlePressEnter(e)}
+					onFocus={() => setIsOnFocus(true)}
+					onBlur={() => setIsOnFocus(false)}
 				/>
 			</SearchInput>
-			<SearchButton>
+			<SearchButton onClick={handleSearchCity}>
 				<AiOutlineSearch />
 			</SearchButton>
 		</Container>
