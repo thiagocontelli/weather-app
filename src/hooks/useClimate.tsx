@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+	createContext,
+	ReactNode,
+	useContext,
+	useEffect,
+	useState,
+} from 'react';
 import axios from 'axios';
 
 interface Climate {
@@ -30,7 +36,7 @@ interface ClimateContextData {
 	handlePressEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export const ClimateContext = createContext<ClimateContextData>(
+const ClimateContext = createContext<ClimateContextData>(
 	{} as ClimateContextData
 );
 
@@ -120,4 +126,10 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 			{children}
 		</ClimateContext.Provider>
 	);
+}
+
+export function useClimate() {
+	const context = useContext(ClimateContext);
+
+	return context;
 }

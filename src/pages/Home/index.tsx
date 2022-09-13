@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { ClimateContext } from '../../ClimateContext';
+import { useClimate } from '../../hooks/useClimate';
 import { Climate } from '../../components/Climate';
 import { Info } from '../../components/Info';
 import { SearchBar } from '../../components/SearchBar';
@@ -8,7 +7,7 @@ import { Container } from './styles';
 import LoadingIcons from 'react-loading-icons';
 
 export function Home() {
-	const { isLoading } = useContext(ClimateContext);
+	const { isLoading } = useClimate();
 
 	return (
 		<>

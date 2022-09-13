@@ -1,4 +1,4 @@
-import { ClimateProvider } from './ClimateContext';
+import { ClimateProvider } from './hooks/useClimate';
 import { Home } from './pages/Home';
 
 import { GlobalStyle } from './styles/global';

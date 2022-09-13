@@ -1,11 +1,10 @@
 import { Container, SearchButton, SearchInput } from './style';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useContext, useState } from 'react';
-import { ClimateContext } from '../../ClimateContext';
+import { useState } from 'react';
+import { useClimate } from '../../hooks/useClimate';
 
 export function SearchBar() {
-	const { onInputChange, handleSearchCity, handlePressEnter } =
-		useContext(ClimateContext);
+	const { onInputChange, handleSearchCity, handlePressEnter } = useClimate();
 
 	const [isOnFocus, setIsOnFocus] = useState(false);
 
