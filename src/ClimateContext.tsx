@@ -50,7 +50,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 
 	const [isLoading, setIsLoading] = useState(true);
 
-	const url = import.meta.env.VITE_APP_BASE_URL;
+	const url = 'http://api.weatherbit.io/v2.0/current?';
 	const key = import.meta.env.VITE_APP_API_KEY;
 
 	const city = climate[0]?.city_name;
