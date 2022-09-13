@@ -12,13 +12,6 @@ interface Climate {
 	};
 }
 
-interface Position {
-	coords: {
-		latitude: number;
-		longitude: number;
-	};
-}
-
 interface ClimateProviderProps {
 	children: ReactNode;
 }
