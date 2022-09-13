@@ -71,7 +71,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 					setClimate(response.data.data);
 					setIsLoading(false);
 				})
-				.catch((error) => console.log('ERRO:', error));
+				.catch((error) => console.log('ERRO 1:', error));
 		}
 
 		getData();
@@ -82,7 +82,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 			await axios
 				.get(`${url}city=${cityName}&key=${key}&lang=pt`)
 				.then((response) => setClimate(response.data.data))
-				.catch((error) => console.log('ERRO:', error));
+				.catch((error) => console.log('ERRO 2:', error));
 		}
 
 		getData();
@@ -94,6 +94,7 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 
 	function handleSearchCity() {
 		setCityName(defaultCity);
+		console.log(climate);
 	}
 
 	function handlePressEnter(e: React.KeyboardEvent<HTMLInputElement>) {
