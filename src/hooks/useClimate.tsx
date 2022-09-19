@@ -70,28 +70,20 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 	}, []);
 
 	useEffect(() => {
-		async function getData() {
-			await axios
-				.get(`${url}lat=${lat}&lon=${lon}&key=${key}&lang=pt`)
-				.then((response) => {
-					setClimate(response.data.data);
-					setIsLoading(false);
-				})
-				.catch((error) => console.log('ERRO 1:', error));
-		}
-
-		getData();
+		axios
+			.get(`${url}lat=${lat}&lon=${lon}&key=${key}&lang=pt`)
+			.then((response) => {
+				setClimate(response.data.data);
+				setIsLoading(false);
+			})
+			.catch((error) => console.log('ERRO 1:', error));
 	}, [lat, lon]);
 
 	useEffect(() => {
-		async function getData() {
-			await axios
-				.get(`${url}city=${cityName}&key=${key}&lang=pt`)
-				.then((response) => setClimate(response.data.data))
-				.catch((error) => console.log('ERRO 2:', error));
-		}
-
-		getData();
+		axios
+			.get(`${url}city=${cityName}&key=${key}&lang=pt`)
+			.then((response) => setClimate(response.data.data))
+			.catch((error) => console.log('ERRO 2:', error));
 	}, [cityName]);
 
 	function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -100,7 +92,6 @@ export function ClimateProvider({ children }: ClimateProviderProps) {
 
 	function handleSearchCity() {
 		setCityName(defaultCity);
-		console.log(climate);
 	}
 
 	function handlePressEnter(e: React.KeyboardEvent<HTMLInputElement>) {
